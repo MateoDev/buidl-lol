@@ -1,147 +1,217 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Home() {
   const [email, setEmail] = useState("");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const agents = [
     {
       name: "Organizer",
       emoji: "📋",
       description: "Manages events, timelines, announcements, and participant communications",
-      capabilities: ["Create hackathons", "Send announcements", "Schedule management", "FAQ handling"],
-      color: "from-blue-500 to-cyan-500",
+      capabilities: ["Create hackathons", "Announcements", "Scheduling", "FAQ handling"],
+      color: "bg-blue-500/20 border-blue-500/40",
+      dotColor: "bg-blue-500",
     },
     {
       name: "Team Former",
       emoji: "🤝",
       description: "Intelligently matches solo participants into balanced, high-performing teams",
-      capabilities: ["Skill-based matching", "Timezone alignment", "Interest pairing", "Team optimization"],
-      color: "from-purple-500 to-pink-500",
+      capabilities: ["Skill matching", "Timezone alignment", "Interest pairing"],
+      color: "bg-purple-500/20 border-purple-500/40",
+      dotColor: "bg-purple-500",
     },
     {
       name: "Mentor",
       emoji: "🧑‍🏫",
       description: "24/7 technical guidance, resource suggestions, and expert escalation",
-      capabilities: ["Answer questions", "Suggest resources", "Debug assistance", "Office hours booking"],
-      color: "from-green-500 to-emerald-500",
+      capabilities: ["Answer questions", "Resources", "Debug help"],
+      color: "bg-green-500/20 border-green-500/40",
+      dotColor: "bg-green-500",
     },
     {
       name: "Submission",
       emoji: "📥",
       description: "Handles project intake, validates requirements, and confirms submissions",
-      capabilities: ["Accept submissions", "Validate requirements", "Deadline reminders", "Edit handling"],
-      color: "from-orange-500 to-yellow-500",
+      capabilities: ["Accept submissions", "Validation", "Reminders"],
+      color: "bg-amber-500/20 border-amber-500/40",
+      dotColor: "bg-amber-500",
     },
     {
       name: "Judge",
       emoji: "⚖️",
       description: "Coordinates fair scoring, manages judges, and calculates final results",
-      capabilities: ["Assign judges", "Collect scores", "Anti-collusion", "Results tabulation"],
-      color: "from-red-500 to-rose-500",
+      capabilities: ["Assign judges", "Scoring", "Results"],
+      color: "bg-red-500/20 border-red-500/40",
+      dotColor: "bg-red-500",
     },
   ];
 
   const steps = [
-    { num: "01", title: "Clone the Recipe", desc: "Fork the repo and configure your agents in minutes" },
-    { num: "02", title: "Connect Your Channels", desc: "Discord, Slack, Telegram — wherever your community lives" },
-    { num: "03", title: "Launch Your Hackathon", desc: "Agents handle the rest: teams, mentoring, submissions, judging" },
+    { num: "01", title: "Clone the Recipe", desc: "Fork the repo and configure your agents" },
+    { num: "02", title: "Connect Channels", desc: "Discord, Slack, Telegram — wherever your community lives" },
+    { num: "03", title: "Launch", desc: "Agents handle teams, mentoring, submissions, judging" },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-950 to-black">
+    <div className="min-h-screen bg-[var(--bg-primary)]">
       {/* Nav */}
-      <nav className="container mx-auto px-6 py-6 flex items-center justify-between">
-        <div className="text-xl font-bold">🏗️ buidl.lol</div>
-        <div className="flex items-center gap-6">
-          <a href="#agents" className="text-gray-400 hover:text-white transition">Agents</a>
-          <a href="#how-it-works" className="text-gray-400 hover:text-white transition">How It Works</a>
-          <a href="#dashboard" className="text-gray-400 hover:text-white transition">Dashboard</a>
-          <a
-            href="https://github.com/evmsystems-ai/buidl-lol"
-            target="_blank"
-            className="px-4 py-2 bg-white text-black font-medium rounded-lg hover:bg-gray-200 transition"
+      <nav className="sticky top-0 z-50 border-b border-[var(--border-muted)] bg-[var(--bg-primary)]/80 backdrop-blur-md">
+        <div className="container flex h-16 items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 text-lg font-semibold">
+            <span className="text-xl">🏗️</span>
+            <span>buidl.lol</span>
+          </Link>
+
+          {/* Desktop nav */}
+          <div className="hidden items-center gap-8 md:flex">
+            <a href="#agents" className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition">
+              Agents
+            </a>
+            <a href="#how-it-works" className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition">
+              How It Works
+            </a>
+            <a href="#dashboard" className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition">
+              Dashboard
+            </a>
+            <a
+              href="https://github.com/evmsystems-ai/buidl-lol"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-9 items-center justify-center rounded-lg bg-[var(--accent-primary)] px-4 text-sm font-medium text-white hover:bg-[var(--accent-hover)] transition glow"
+            >
+              Get Started
+            </a>
+          </div>
+
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--border-default)] md:hidden"
+            aria-label="Toggle menu"
           >
-            Get Started
-          </a>
+            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {mobileMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
         </div>
+
+        {/* Mobile menu */}
+        {mobileMenuOpen && (
+          <div className="border-t border-[var(--border-muted)] bg-[var(--bg-primary)] px-4 py-4 md:hidden">
+            <div className="flex flex-col gap-4">
+              <a href="#agents" className="text-sm text-[var(--text-secondary)]" onClick={() => setMobileMenuOpen(false)}>
+                Agents
+              </a>
+              <a href="#how-it-works" className="text-sm text-[var(--text-secondary)]" onClick={() => setMobileMenuOpen(false)}>
+                How It Works
+              </a>
+              <a href="#dashboard" className="text-sm text-[var(--text-secondary)]" onClick={() => setMobileMenuOpen(false)}>
+                Dashboard
+              </a>
+              <a
+                href="https://github.com/evmsystems-ai/buidl-lol"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-10 items-center justify-center rounded-lg bg-[var(--accent-primary)] text-sm font-medium text-white"
+              >
+                Get Started
+              </a>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero */}
-      <header className="container mx-auto px-6 py-20 text-center">
-        <div className="inline-block px-4 py-2 bg-purple-500/10 border border-purple-500/20 rounded-full text-purple-400 text-sm font-medium mb-6">
+      <header className="container py-16 text-center md:py-24 lg:py-32">
+        <div className="badge badge-accent mx-auto mb-6">
           Open Source • Agent-Native • Community Driven
         </div>
-        <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent leading-tight">
-          Run Hackathons<br />with AI Agents
+        <h1 className="mx-auto max-w-4xl text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
+          Run Hackathons with{" "}
+          <span className="gradient-text">AI Agents</span>
         </h1>
-        <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+        <p className="mx-auto mt-6 max-w-2xl text-base text-[var(--text-secondary)] sm:text-lg md:text-xl">
           The complete open-source platform for AI-powered hackathons. 
-          Deploy a fleet of agents that handle team formation, mentorship, 
-          submissions, and judging — so you can focus on community.
+          Deploy agents that handle team formation, mentorship, 
+          submissions, and judging.
         </p>
-        <div className="flex gap-4 justify-center flex-wrap">
+        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
             href="https://github.com/evmsystems-ai/buidl-lol"
             target="_blank"
-            className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 font-semibold rounded-xl hover:opacity-90 transition text-lg"
+            rel="noopener noreferrer"
+            className="inline-flex h-12 w-full items-center justify-center rounded-xl bg-[var(--accent-primary)] px-8 font-semibold text-white hover:bg-[var(--accent-hover)] transition glow sm:w-auto"
           >
             🚀 Clone the Recipe
           </a>
           <a
             href="https://github.com/evmsystems-ai/buidl-lol"
             target="_blank"
-            className="px-8 py-4 border border-gray-600 rounded-xl hover:border-gray-400 transition text-lg"
+            rel="noopener noreferrer"
+            className="inline-flex h-12 w-full items-center justify-center rounded-xl border border-[var(--border-default)] px-8 font-medium hover:border-[var(--border-emphasis)] hover:bg-[var(--bg-hover)] transition sm:w-auto"
           >
             ⭐ Star on GitHub
           </a>
         </div>
-        <p className="text-gray-500 text-sm mt-6">
+        <p className="mt-6 text-sm text-[var(--text-muted)]">
           Free forever • No vendor lock-in • Deploy anywhere
         </p>
       </header>
 
       {/* Agent Fleet */}
-      <section id="agents" className="container mx-auto px-6 py-20">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">Your Agent Fleet</h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Five specialized AI agents work together to run your hackathon. 
-            Each handles a critical function, all coordinating seamlessly.
+      <section id="agents" className="container py-16 md:py-24">
+        <div className="mb-12 text-center md:mb-16">
+          <h2 className="text-2xl font-bold sm:text-3xl md:text-4xl">Your Agent Fleet</h2>
+          <p className="mt-4 text-[var(--text-secondary)] max-w-2xl mx-auto">
+            Five specialized AI agents work together to run your hackathon.
           </p>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {agents.map((agent) => (
             <div
               key={agent.name}
-              className="p-6 rounded-2xl bg-gray-900/50 border border-gray-800 hover:border-gray-700 transition group"
+              className={`rounded-xl border p-5 transition card-hover ${agent.color}`}
             >
-              <div
-                className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${agent.color} flex items-center justify-center text-3xl mb-5 group-hover:scale-110 transition`}
-              >
-                {agent.emoji}
+              <div className="mb-4 flex items-center gap-3">
+                <span className="text-3xl">{agent.emoji}</span>
+                <div>
+                  <h3 className="font-semibold">{agent.name} Agent</h3>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className={`status-dot active ${agent.dotColor}`}></span>
+                    <span className="text-xs text-[var(--text-muted)]">Online</span>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-2">{agent.name} Agent</h3>
-              <p className="text-gray-400 mb-4">{agent.description}</p>
+              <p className="mb-4 text-sm text-[var(--text-secondary)]">{agent.description}</p>
               <div className="flex flex-wrap gap-2">
                 {agent.capabilities.map((cap) => (
-                  <span key={cap} className="px-2 py-1 bg-gray-800 rounded text-xs text-gray-300">
+                  <span key={cap} className="badge text-xs">
                     {cap}
                   </span>
                 ))}
               </div>
             </div>
           ))}
-          {/* Clone CTA Card */}
-          <div className="p-6 rounded-2xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/30 flex flex-col justify-center items-center text-center">
-            <div className="text-4xl mb-4">🔧</div>
-            <h3 className="text-xl font-semibold mb-2">Build Your Own</h3>
-            <p className="text-gray-400 mb-4">Add custom agents for your specific hackathon needs</p>
+
+          {/* Build your own card */}
+          <div className="rounded-xl border border-dashed border-[var(--border-default)] p-5 flex flex-col items-center justify-center text-center bg-[var(--bg-surface)]/50">
+            <span className="text-3xl mb-3">🔧</span>
+            <h3 className="font-semibold mb-2">Build Your Own</h3>
+            <p className="text-sm text-[var(--text-secondary)] mb-4">Add custom agents for your needs</p>
             <a
               href="https://github.com/evmsystems-ai/buidl-lol/tree/main/agents"
               target="_blank"
-              className="text-purple-400 hover:text-purple-300 font-medium"
+              rel="noopener noreferrer"
+              className="text-sm text-[var(--accent-primary)] hover:underline"
             >
               View Agent Specs →
             </a>
@@ -150,117 +220,126 @@ export default function Home() {
       </section>
 
       {/* How It Works */}
-      <section id="how-it-works" className="container mx-auto px-6 py-20">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">Launch in 3 Steps</h2>
-          <p className="text-gray-400 text-lg">From zero to running hackathon in under an hour</p>
-        </div>
-        <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-8">
-          {steps.map((step) => (
-            <div key={step.num} className="text-center">
-              <div className="text-5xl font-bold text-purple-500/30 mb-4">{step.num}</div>
-              <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-              <p className="text-gray-400">{step.desc}</p>
-            </div>
-          ))}
-        </div>
-        <div className="text-center mt-12">
-          <a
-            href="https://github.com/evmsystems-ai/buidl-lol#quick-start"
-            target="_blank"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gray-800 rounded-xl hover:bg-gray-700 transition"
-          >
-            📖 Read the Quick Start Guide
-          </a>
+      <section id="how-it-works" className="border-y border-[var(--border-muted)] bg-[var(--bg-secondary)]">
+        <div className="container py-16 md:py-24">
+          <div className="mb-12 text-center md:mb-16">
+            <h2 className="text-2xl font-bold sm:text-3xl md:text-4xl">Launch in 3 Steps</h2>
+            <p className="mt-4 text-[var(--text-secondary)]">From zero to running hackathon in under an hour</p>
+          </div>
+
+          <div className="grid gap-8 sm:grid-cols-3 max-w-4xl mx-auto">
+            {steps.map((step, idx) => (
+              <div key={step.num} className="text-center">
+                <div className="text-4xl font-bold text-[var(--accent-primary)]/30 mb-3 md:text-5xl">
+                  {step.num}
+                </div>
+                <h3 className="font-semibold mb-2">{step.title}</h3>
+                <p className="text-sm text-[var(--text-secondary)]">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <a
+              href="https://github.com/evmsystems-ai/buidl-lol#quick-start"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg border border-[var(--border-default)] px-5 py-3 text-sm font-medium hover:border-[var(--border-emphasis)] hover:bg-[var(--bg-hover)] transition"
+            >
+              📖 Read the Quick Start Guide
+            </a>
+          </div>
         </div>
       </section>
 
       {/* Dashboard Preview */}
-      <section id="dashboard" className="container mx-auto px-6 py-20">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">Powerful Dashboard</h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+      <section id="dashboard" className="container py-16 md:py-24">
+        <div className="mb-12 text-center md:mb-16">
+          <h2 className="text-2xl font-bold sm:text-3xl md:text-4xl">Powerful Dashboard</h2>
+          <p className="mt-4 text-[var(--text-secondary)] max-w-2xl mx-auto">
             Monitor participants, teams, submissions, and agent activity in real-time
           </p>
         </div>
-        
-        {/* Dashboard Preview Mock */}
-        <div className="max-w-5xl mx-auto rounded-2xl bg-gray-900 border border-gray-800 overflow-hidden shadow-2xl">
-          {/* Mock Browser Chrome */}
-          <div className="bg-gray-800 px-4 py-3 flex items-center gap-2 border-b border-gray-700">
-            <div className="flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-red-500"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+
+        {/* Dashboard Mock */}
+        <div className="mx-auto max-w-5xl overflow-hidden rounded-xl border border-[var(--border-default)] bg-[var(--bg-surface)] shadow-2xl">
+          {/* Browser chrome */}
+          <div className="flex items-center gap-2 border-b border-[var(--border-muted)] bg-[var(--bg-elevated)] px-4 py-3">
+            <div className="flex gap-1.5">
+              <div className="h-3 w-3 rounded-full bg-red-500/80"></div>
+              <div className="h-3 w-3 rounded-full bg-yellow-500/80"></div>
+              <div className="h-3 w-3 rounded-full bg-green-500/80"></div>
             </div>
             <div className="flex-1 mx-4">
-              <div className="bg-gray-700 rounded px-3 py-1 text-sm text-gray-400 max-w-md mx-auto">
+              <div className="mx-auto max-w-xs rounded bg-[var(--bg-primary)] px-3 py-1.5 text-center text-xs text-[var(--text-muted)]">
                 buidl.lol/dashboard
               </div>
             </div>
           </div>
-          
-          {/* Dashboard Content */}
-          <div className="p-6">
-            {/* Stats Row */}
-            <div className="grid grid-cols-4 gap-4 mb-6">
+
+          {/* Dashboard content */}
+          <div className="p-4 md:p-6">
+            {/* Stats grid */}
+            <div className="grid grid-cols-2 gap-3 mb-6 md:grid-cols-4 md:gap-4">
               {[
                 { label: "Participants", value: "156", icon: "👥", change: "+12 today" },
                 { label: "Teams", value: "42", icon: "🤝", change: "3 forming" },
                 { label: "Submissions", value: "28", icon: "📥", change: "14 pending" },
-                { label: "Agents Active", value: "5/5", icon: "🤖", change: "All running" },
+                { label: "Agents", value: "5/5", icon: "🤖", change: "All running" },
               ].map((stat) => (
-                <div key={stat.label} className="p-4 rounded-xl bg-gray-800/50 border border-gray-700">
+                <div key={stat.label} className="rounded-lg border border-[var(--border-muted)] bg-[var(--bg-elevated)] p-3 md:p-4">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-2xl">{stat.icon}</span>
-                    <span className="text-xs text-green-400">{stat.change}</span>
+                    <span className="text-lg md:text-xl">{stat.icon}</span>
+                    <span className="text-[10px] text-green-400 md:text-xs">{stat.change}</span>
                   </div>
-                  <div className="text-2xl font-bold">{stat.value}</div>
-                  <div className="text-sm text-gray-400">{stat.label}</div>
+                  <div className="text-xl font-bold md:text-2xl">{stat.value}</div>
+                  <div className="text-xs text-[var(--text-muted)]">{stat.label}</div>
                 </div>
               ))}
             </div>
-            
-            {/* Activity Feed */}
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="rounded-xl bg-gray-800/50 border border-gray-700 p-4">
-                <h4 className="font-semibold mb-3 flex items-center gap-2">
+
+            {/* Two column layout */}
+            <div className="grid gap-4 md:grid-cols-2">
+              {/* Activity feed */}
+              <div className="rounded-lg border border-[var(--border-muted)] bg-[var(--bg-elevated)] p-4">
+                <h4 className="mb-3 flex items-center gap-2 font-semibold text-sm">
                   <span>📊</span> Live Activity
                 </h4>
-                <div className="space-y-3 text-sm">
+                <div className="space-y-3 text-xs md:text-sm">
                   {[
-                    { time: "2m ago", event: "Mentor Agent answered question in #help", color: "text-green-400" },
-                    { time: "5m ago", event: "Team 'Web3 Wizards' formed (4 members)", color: "text-purple-400" },
-                    { time: "8m ago", event: "New submission: 'DeFi Dashboard'", color: "text-orange-400" },
-                    { time: "12m ago", event: "Organizer sent deadline reminder", color: "text-blue-400" },
+                    { time: "2m", event: "Mentor Agent answered in #help", color: "text-green-400" },
+                    { time: "5m", event: "Team 'Web3 Wizards' formed", color: "text-purple-400" },
+                    { time: "8m", event: "New submission: 'DeFi Dashboard'", color: "text-amber-400" },
+                    { time: "12m", event: "Organizer sent reminder", color: "text-blue-400" },
                   ].map((item, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <span className="text-gray-500 text-xs w-14">{item.time}</span>
+                    <div key={i} className="flex items-start gap-2">
+                      <span className="text-[var(--text-muted)] w-8 shrink-0">{item.time}</span>
                       <span className={item.color}>•</span>
-                      <span className="text-gray-300">{item.event}</span>
+                      <span className="text-[var(--text-secondary)]">{item.event}</span>
                     </div>
                   ))}
                 </div>
               </div>
-              
-              <div className="rounded-xl bg-gray-800/50 border border-gray-700 p-4">
-                <h4 className="font-semibold mb-3 flex items-center gap-2">
+
+              {/* Agent status */}
+              <div className="rounded-lg border border-[var(--border-muted)] bg-[var(--bg-elevated)] p-4">
+                <h4 className="mb-3 flex items-center gap-2 font-semibold text-sm">
                   <span>🤖</span> Agent Status
                 </h4>
                 <div className="space-y-3">
                   {[
-                    { name: "Organizer", status: "Active", action: "Monitoring schedule" },
-                    { name: "Team Former", status: "Active", action: "3 matches pending" },
-                    { name: "Mentor", status: "Active", action: "47 questions answered" },
-                    { name: "Submission", status: "Active", action: "Validating 2 projects" },
-                    { name: "Judge", status: "Standby", action: "Awaiting deadline" },
+                    { name: "Organizer", status: "Active", action: "Monitoring" },
+                    { name: "Team Former", status: "Active", action: "3 matches" },
+                    { name: "Mentor", status: "Active", action: "47 answered" },
+                    { name: "Submission", status: "Active", action: "Validating 2" },
+                    { name: "Judge", status: "Standby", action: "Awaiting" },
                   ].map((agent) => (
-                    <div key={agent.name} className="flex items-center justify-between text-sm">
+                    <div key={agent.name} className="flex items-center justify-between text-xs md:text-sm">
                       <div className="flex items-center gap-2">
-                        <span className={`w-2 h-2 rounded-full ${agent.status === "Active" ? "bg-green-500" : "bg-gray-500"}`}></span>
+                        <span className={`h-2 w-2 rounded-full ${agent.status === "Active" ? "bg-green-500" : "bg-[var(--text-muted)]"}`}></span>
                         <span>{agent.name}</span>
                       </div>
-                      <span className="text-gray-400 text-xs">{agent.action}</span>
+                      <span className="text-[var(--text-muted)]">{agent.action}</span>
                     </div>
                   ))}
                 </div>
@@ -268,93 +347,86 @@ export default function Home() {
             </div>
           </div>
         </div>
-        
-        <div className="text-center mt-8">
-          <a
-            href="/dashboard"
-            className="text-purple-400 hover:text-purple-300 font-medium"
-          >
+
+        <div className="mt-8 text-center">
+          <Link href="/dashboard" className="text-sm text-[var(--accent-primary)] hover:underline">
             Explore the Full Dashboard →
-          </a>
+          </Link>
         </div>
       </section>
 
-      {/* Features Grid */}
-      <section className="container mx-auto px-6 py-20">
-        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
-          <div>
-            <h3 className="text-2xl font-bold mb-6">🔧 For Organizers</h3>
-            <ul className="space-y-4 text-gray-400">
-              <li className="flex items-start gap-3">
-                <span className="text-green-400">✓</span>
-                <span><strong className="text-white">One-click setup</strong> — Deploy a full hackathon stack in minutes</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-green-400">✓</span>
-                <span><strong className="text-white">Automated comms</strong> — Announcements, reminders, and updates</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-green-400">✓</span>
-                <span><strong className="text-white">Smart team matching</strong> — AI pairs participants by skills</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-green-400">✓</span>
-                <span><strong className="text-white">Fair judging</strong> — Anti-collusion, blind scoring, transparency</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-green-400">✓</span>
-                <span><strong className="text-white">Full analytics</strong> — Engagement metrics and insights</span>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-2xl font-bold mb-6">🚀 For Participants</h3>
-            <ul className="space-y-4 text-gray-400">
-              <li className="flex items-start gap-3">
-                <span className="text-green-400">✓</span>
-                <span><strong className="text-white">24/7 AI mentor</strong> — Get help anytime, on any topic</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-green-400">✓</span>
-                <span><strong className="text-white">Find teammates</strong> — Smart matching with compatible builders</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-green-400">✓</span>
-                <span><strong className="text-white">Easy submissions</strong> — Simple process with validation</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-green-400">✓</span>
-                <span><strong className="text-white">Real-time updates</strong> — Never miss a deadline or announcement</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-green-400">✓</span>
-                <span><strong className="text-white">Transparent results</strong> — See how your project was scored</span>
-              </li>
-            </ul>
+      {/* Features */}
+      <section className="border-t border-[var(--border-muted)] bg-[var(--bg-secondary)]">
+        <div className="container py-16 md:py-24">
+          <div className="grid gap-12 md:grid-cols-2 max-w-5xl mx-auto">
+            <div>
+              <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+                <span>🔧</span> For Organizers
+              </h3>
+              <ul className="space-y-4">
+                {[
+                  { title: "One-click setup", desc: "Deploy a full hackathon stack in minutes" },
+                  { title: "Automated comms", desc: "Announcements, reminders, and updates" },
+                  { title: "Smart team matching", desc: "AI pairs participants by skills" },
+                  { title: "Fair judging", desc: "Anti-collusion, blind scoring, transparency" },
+                ].map((item) => (
+                  <li key={item.title} className="flex items-start gap-3 text-sm">
+                    <span className="text-green-400 mt-0.5">✓</span>
+                    <span>
+                      <strong className="text-[var(--text-primary)]">{item.title}</strong>
+                      <span className="text-[var(--text-secondary)]"> — {item.desc}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+                <span>🚀</span> For Participants
+              </h3>
+              <ul className="space-y-4">
+                {[
+                  { title: "24/7 AI mentor", desc: "Get help anytime, on any topic" },
+                  { title: "Find teammates", desc: "Smart matching with compatible builders" },
+                  { title: "Easy submissions", desc: "Simple process with validation" },
+                  { title: "Real-time updates", desc: "Never miss a deadline" },
+                ].map((item) => (
+                  <li key={item.title} className="flex items-start gap-3 text-sm">
+                    <span className="text-green-400 mt-0.5">✓</span>
+                    <span>
+                      <strong className="text-[var(--text-primary)]">{item.title}</strong>
+                      <span className="text-[var(--text-secondary)]"> — {item.desc}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="container mx-auto px-6 py-24">
-        <div className="max-w-3xl mx-auto text-center p-12 rounded-3xl bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-blue-500/10 border border-purple-500/20">
-          <h2 className="text-4xl font-bold mb-4">Ready to buidl?</h2>
-          <p className="text-gray-400 text-lg mb-8">
+      <section className="container py-16 md:py-24">
+        <div className="mx-auto max-w-3xl text-center rounded-2xl border border-[var(--accent-primary)]/20 bg-[var(--accent-subtle)] p-8 md:p-12">
+          <h2 className="text-2xl font-bold mb-4 md:text-3xl">Ready to buidl?</h2>
+          <p className="text-[var(--text-secondary)] mb-8 max-w-xl mx-auto">
             Clone the recipe, configure your agents, and launch your hackathon today.
             It's free, open-source, and yours forever.
           </p>
-          <div className="flex gap-4 justify-center flex-wrap">
+          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a
               href="https://github.com/evmsystems-ai/buidl-lol"
               target="_blank"
-              className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl font-semibold hover:opacity-90 transition text-lg"
+              rel="noopener noreferrer"
+              className="inline-flex h-12 w-full items-center justify-center rounded-xl bg-[var(--accent-primary)] px-8 font-semibold text-white hover:bg-[var(--accent-hover)] transition glow sm:w-auto"
             >
               🚀 Clone the Recipe
             </a>
             <a
               href="https://discord.gg/buidl"
               target="_blank"
-              className="px-8 py-4 border border-gray-600 rounded-xl hover:border-gray-400 transition text-lg"
+              rel="noopener noreferrer"
+              className="inline-flex h-12 w-full items-center justify-center rounded-xl border border-[var(--border-default)] px-8 font-medium hover:border-[var(--border-emphasis)] hover:bg-[var(--bg-hover)] transition sm:w-auto"
             >
               💬 Join Discord
             </a>
@@ -363,12 +435,12 @@ export default function Home() {
       </section>
 
       {/* Waitlist */}
-      <section className="container mx-auto px-6 py-16 text-center">
-        <p className="text-gray-400 mb-4">
+      <section className="container pb-16 text-center">
+        <p className="text-[var(--text-muted)] text-sm mb-4">
           Want hosted hackathons? Join the waitlist for buidl.lol Cloud
         </p>
         <form
-          className="flex gap-3 max-w-md mx-auto"
+          className="mx-auto flex max-w-md flex-col gap-3 sm:flex-row"
           onSubmit={(e) => {
             e.preventDefault();
             alert("Thanks! We'll be in touch.");
@@ -380,12 +452,12 @@ export default function Home() {
             placeholder="you@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="flex-1 px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 focus:border-purple-500 focus:outline-none"
+            className="flex-1 rounded-lg border border-[var(--border-default)] bg-[var(--bg-surface)] px-4 py-3 text-sm placeholder:text-[var(--text-muted)] focus:border-[var(--accent-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--accent-primary)]"
             required
           />
           <button
             type="submit"
-            className="px-6 py-3 bg-gray-800 rounded-lg font-medium hover:bg-gray-700 transition"
+            className="rounded-lg bg-[var(--bg-surface)] border border-[var(--border-default)] px-6 py-3 text-sm font-medium hover:bg-[var(--bg-hover)] transition"
           >
             Notify Me
           </button>
@@ -393,18 +465,32 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-800 py-12">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="text-xl font-bold">🏗️ buidl.lol</div>
-            <div className="flex gap-8 text-gray-400">
-              <a href="https://github.com/evmsystems-ai/buidl-lol" target="_blank" className="hover:text-white">GitHub</a>
-              <a href="https://github.com/evmsystems-ai/buidl-lol/tree/main/agents" target="_blank" className="hover:text-white">Docs</a>
-              <a href="https://discord.gg/buidl" target="_blank" className="hover:text-white">Discord</a>
-              <a href="https://twitter.com/buidl_lol" target="_blank" className="hover:text-white">Twitter</a>
+      <footer className="border-t border-[var(--border-muted)]">
+        <div className="container py-8">
+          <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+            <div className="flex items-center gap-2 text-lg font-semibold">
+              <span>🏗️</span>
+              <span>buidl.lol</span>
             </div>
-            <p className="text-gray-500 text-sm">
-              Built with 🤖 by <a href="https://evmsystems.ai" className="text-gray-400 hover:text-white">EVM Systems</a>
+            <div className="flex flex-wrap justify-center gap-6 text-sm text-[var(--text-secondary)]">
+              <a href="https://github.com/evmsystems-ai/buidl-lol" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)]">
+                GitHub
+              </a>
+              <a href="https://github.com/evmsystems-ai/buidl-lol/tree/main/agents" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)]">
+                Docs
+              </a>
+              <a href="https://discord.gg/buidl" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)]">
+                Discord
+              </a>
+              <a href="https://twitter.com/buidl_lol" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)]">
+                Twitter
+              </a>
+            </div>
+            <p className="text-xs text-[var(--text-muted)]">
+              Built with 🤖 by{" "}
+              <a href="https://evmsystems.ai" className="hover:text-[var(--text-primary)]">
+                EVM Systems
+              </a>
             </p>
           </div>
         </div>
