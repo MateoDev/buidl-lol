@@ -1,368 +1,163 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 
 export default function Home() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   const agents = [
     {
-      name: "Architect",
-      role: "Challenge Design",
-      desc: "Generates hackathon challenges from sponsor SDK docs",
-      color: "orange",
-      status: "online",
+      name: "Organizer",
+      description: "Manages hackathon lifecycle, timelines, announcements, and participant communications.",
+      icon: "📋",
     },
     {
-      name: "Evaluator", 
-      role: "Multi-Pass Judging",
-      desc: "Scores submissions with anti-gaming protection",
-      color: "purple",
-      status: "online",
+      name: "Judge", 
+      description: "Multi-pass evaluation with anti-gaming detection. Scores submissions fairly at scale.",
+      icon: "⚖️",
     },
     {
-      name: "Treasurer",
-      role: "Payment Execution",
-      desc: "Multi-sig bounty distribution on-chain",
-      color: "emerald",
-      status: "online",
+      name: "Bounty Distribution",
+      description: "Secure multi-sig payments. On-chain USDC or fiat rails. Automatic winner payouts.",
+      icon: "💰",
     },
     {
-      name: "Guide",
-      role: "24/7 Mentoring",
-      desc: "Technical support trained on partner docs",
-      color: "cyan",
-      status: "online",
-    },
-    {
-      name: "Herald",
-      role: "Marketing & Comms",
-      desc: "Pre-event campaigns to post-event case studies",
-      color: "pink",
-      status: "online",
-    },
-    {
-      name: "Matchmaker",
-      role: "Team Formation",
-      desc: "AI-powered skill-based team matching",
-      color: "amber",
-      status: "online",
+      name: "Dev Rel Support",
+      description: "24/7 technical mentoring trained on your SDK docs. Answers questions, debugs issues.",
+      icon: "🛠️",
     },
   ];
 
-  const colorClasses: Record<string, string> = {
-    orange: "border-orange-500/30 bg-orange-500/5 hover:border-orange-500/50",
-    purple: "border-purple-500/30 bg-purple-500/5 hover:border-purple-500/50",
-    emerald: "border-emerald-500/30 bg-emerald-500/5 hover:border-emerald-500/50",
-    cyan: "border-cyan-500/30 bg-cyan-500/5 hover:border-cyan-500/50",
-    pink: "border-pink-500/30 bg-pink-500/5 hover:border-pink-500/50",
-    amber: "border-amber-500/30 bg-amber-500/5 hover:border-amber-500/50",
-  };
-
-  const dotClasses: Record<string, string> = {
-    orange: "bg-orange-500",
-    purple: "bg-purple-500",
-    emerald: "bg-emerald-500",
-    cyan: "bg-cyan-500",
-    pink: "bg-pink-500",
-    amber: "bg-amber-500",
-  };
-
   return (
-    <div className="min-h-screen bg-[#09090b]">
+    <div className="min-h-screen bg-white text-zinc-900">
       {/* Nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/50 glass">
-        <div className="container-wide flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-zinc-200">
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 font-semibold text-zinc-900">
             <span className="text-xl">🏗️</span>
-            <span className="font-semibold text-white">buidl.lol</span>
+            <span>buidl.lol</span>
           </Link>
-
           <div className="hidden md:flex items-center gap-8">
-            <a href="#how-it-works" className="text-sm text-zinc-400 hover:text-white transition">How It Works</a>
-            <a href="#agents" className="text-sm text-zinc-400 hover:text-white transition">Agents</a>
-            <a href="#hub" className="text-sm text-zinc-400 hover:text-white transition">Hub</a>
-            <a href="https://github.com/evmsystems-ai/buidl-lol" target="_blank" rel="noopener noreferrer" className="text-sm text-zinc-400 hover:text-white transition">GitHub</a>
-            <Link href="/hub" className="btn btn-primary h-9 px-4 text-sm glow-orange">
-              Launch Hub
-            </Link>
+            <a href="#how-it-works" className="text-sm text-zinc-600 hover:text-zinc-900 transition">How it works</a>
+            <a href="#agents" className="text-sm text-zinc-600 hover:text-zinc-900 transition">Agent Operators</a>
+            <a href="https://github.com/evmsystems-ai/buidl-lol" target="_blank" rel="noopener noreferrer" className="text-sm text-zinc-600 hover:text-zinc-900 transition">GitHub</a>
           </div>
-
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-zinc-400"
-            aria-label="Menu"
+          <a 
+            href="https://github.com/evmsystems-ai/buidl-lol" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-medium text-zinc-900 hover:text-zinc-600 transition"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {mobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
+            Star on GitHub →
+          </a>
         </div>
-
-        {mobileMenuOpen && (
-          <div className="md:hidden border-t border-zinc-800 bg-zinc-900 p-4">
-            <div className="flex flex-col gap-4">
-              <a href="#how-it-works" className="text-sm text-zinc-400" onClick={() => setMobileMenuOpen(false)}>How It Works</a>
-              <a href="#agents" className="text-sm text-zinc-400" onClick={() => setMobileMenuOpen(false)}>Agents</a>
-              <a href="#hub" className="text-sm text-zinc-400" onClick={() => setMobileMenuOpen(false)}>Hub</a>
-              <Link href="/hub" className="btn btn-primary h-10 text-sm">Launch Hub</Link>
-            </div>
-          </div>
-        )}
       </nav>
 
       {/* Hero */}
-      <header className="relative pt-32 pb-20 md:pt-40 md:pb-32 bg-grid">
-        <div className="container-narrow text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full border border-orange-500/30 bg-orange-500/10 text-sm text-orange-400">
-            <span className="w-2 h-2 rounded-full bg-orange-500 status-processing"></span>
-            24/7 Autonomous
+      <section className="pt-32 pb-20 md:pt-40 md:pb-32">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full bg-zinc-100 text-sm text-zinc-600">
+            <span className="w-2 h-2 rounded-full bg-green-500"></span>
+            Open Source
           </div>
           
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
-            Hackathons That{" "}
-            <span className="gradient-text">Never Sleep</span>
+          <h1 className="text-4xl md:text-6xl font-semibold tracking-tight leading-tight mb-6">
+            The coordination layer for<br />
+            <span className="text-zinc-400">innovation programs</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10">
-            Six AI agents run your hackathon end-to-end: challenge design, 
-            mentoring, judging, and prize distribution. Zero ops overhead.
+          <p className="text-lg md:text-xl text-zinc-500 max-w-2xl mx-auto mb-10">
+            Run hackathons, bounty programs, and innovation challenges with AI agent operators. 
+            Self-host or let us manage it for you.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/hub" className="btn btn-primary h-12 px-8 text-base glow-orange w-full sm:w-auto">
-              Launch Your Hackathon
+            <Link 
+              href="/builder"
+              className="w-full sm:w-auto inline-flex items-center justify-center h-12 px-8 bg-zinc-900 text-white font-medium rounded-lg hover:bg-zinc-800 transition"
+            >
+              Get Started as Builder
             </Link>
-            <a
-              href="https://github.com/evmsystems-ai/buidl-lol"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-secondary h-12 px-8 text-base w-full sm:w-auto"
+            <Link 
+              href="/organizer"
+              className="w-full sm:w-auto inline-flex items-center justify-center h-12 px-8 bg-white text-zinc-900 font-medium rounded-lg border border-zinc-300 hover:border-zinc-400 hover:bg-zinc-50 transition"
             >
-              Deploy Agents →
-            </a>
-          </div>
-
-          <p className="mt-6 text-sm text-zinc-500">
-            Open source • Self-host or managed via XO
-          </p>
-        </div>
-
-        {/* Floating stats */}
-        <div className="container-wide mt-16">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { value: "700+", label: "Hackathons inspiration" },
-              { value: "6", label: "Autonomous agents" },
-              { value: "24/7", label: "Always running" },
-              { value: "$0", label: "Ops overhead" },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center p-4 rounded-lg border border-zinc-800 bg-zinc-900/50">
-                <div className="text-2xl md:text-3xl font-bold text-white">{stat.value}</div>
-                <div className="text-xs md:text-sm text-zinc-500">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </header>
-
-      {/* How It Works */}
-      <section id="how-it-works" className="py-20 md:py-32 border-t border-zinc-800">
-        <div className="container-narrow">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Traditional vs <span className="gradient-text">buidl.lol</span>
-            </h2>
-            <p className="text-zinc-400 max-w-xl mx-auto">
-              We replace 3 months of planning, $65K in costs, and 5+ staff with 
-              autonomous agents that run hackathons 24/7.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Traditional */}
-            <div className="p-6 rounded-xl border border-zinc-800 bg-zinc-900/30">
-              <div className="flex items-center gap-3 mb-6">
-                <span className="text-2xl">😓</span>
-                <h3 className="text-lg font-semibold text-zinc-400">Traditional Hackathon</h3>
-              </div>
-              <ul className="space-y-4 text-sm">
-                {[
-                  "3 month planning cycle",
-                  "$30K-$65K operational cost",
-                  "5+ dedicated staff required",
-                  "Judge fatigue on 30+ projects",
-                  "Episodic — insights decay post-event",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-zinc-400">
-                    <span className="text-red-400 mt-0.5">✗</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* buidl.lol */}
-            <div className="p-6 rounded-xl border border-orange-500/30 bg-orange-500/5">
-              <div className="flex items-center gap-3 mb-6">
-                <span className="text-2xl">🚀</span>
-                <h3 className="text-lg font-semibold text-orange-400">buidl.lol</h3>
-              </div>
-              <ul className="space-y-4 text-sm">
-                {[
-                  "Launch in minutes via Hub",
-                  "Near-zero marginal ops cost",
-                  "6 AI agents that never sleep",
-                  "Multi-pass judging with anti-gaming",
-                  "Continuous mode — always-on bounties",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-zinc-300">
-                    <span className="text-green-400 mt-0.5">✓</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
+              Get Started as Organizer
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Agents */}
-      <section id="agents" className="py-20 md:py-32 border-t border-zinc-800 bg-zinc-900/30">
-        <div className="container-wide">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              The Agent Fleet
-            </h2>
-            <p className="text-zinc-400 max-w-xl mx-auto">
-              Six specialized agents with clear separation of concerns. 
-              Deploy individually or as a coordinated ensemble.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {agents.map((agent) => (
-              <div
-                key={agent.name}
-                className={`p-5 rounded-xl border transition card-hover ${colorClasses[agent.color]}`}
-              >
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-semibold text-white">{agent.name}</h3>
-                  <div className="flex items-center gap-2">
-                    <span className={`w-2 h-2 rounded-full ${dotClasses[agent.color]} status-online`}></span>
-                    <span className="text-xs text-zinc-500">Online</span>
-                  </div>
-                </div>
-                <div className="text-sm text-zinc-400 mb-2">{agent.role}</div>
-                <p className="text-sm text-zinc-500">{agent.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-8 text-center">
-            <a
-              href="https://github.com/evmsystems-ai/buidl-lol/tree/main/agents"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-orange-400 hover:underline"
-            >
-              View Agent Specifications →
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Hub Preview */}
-      <section id="hub" className="py-20 md:py-32 border-t border-zinc-800">
-        <div className="container-narrow">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              The <span className="gradient-text-cyan">Hub</span>
-            </h2>
-            <p className="text-zinc-400 max-w-xl mx-auto">
-              ChatGPT-style interface for hackathon organization. 
-              Configure, launch, and monitor — all in one place.
-            </p>
-          </div>
-
-          {/* Hub Mock */}
-          <div className="rounded-xl border border-zinc-800 bg-zinc-900 overflow-hidden shadow-2xl">
-            {/* Window chrome */}
-            <div className="flex items-center gap-2 px-4 py-3 border-b border-zinc-800 bg-zinc-900/80">
+      {/* Product Screenshot */}
+      <section className="pb-20 md:pb-32">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="rounded-xl border border-zinc-200 bg-zinc-50 overflow-hidden shadow-2xl shadow-zinc-200/50">
+            {/* Browser chrome */}
+            <div className="flex items-center gap-2 px-4 py-3 bg-zinc-100 border-b border-zinc-200">
               <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-zinc-700"></div>
-                <div className="w-3 h-3 rounded-full bg-zinc-700"></div>
-                <div className="w-3 h-3 rounded-full bg-zinc-700"></div>
+                <div className="w-3 h-3 rounded-full bg-zinc-300"></div>
+                <div className="w-3 h-3 rounded-full bg-zinc-300"></div>
+                <div className="w-3 h-3 rounded-full bg-zinc-300"></div>
               </div>
               <div className="flex-1 mx-4">
-                <div className="text-xs text-zinc-500 text-center">hub.buidl.lol</div>
-              </div>
-            </div>
-
-            {/* Hub UI */}
-            <div className="flex h-[500px]">
-              {/* Sidebar */}
-              <div className="w-64 border-r border-zinc-800 p-4 hidden md:block">
-                <button className="w-full flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-800 text-sm text-white mb-4">
-                  <span>+</span> New Hackathon
-                </button>
-                <div className="space-y-1">
-                  {["ETH Denver 2026", "Base Buildathon", "AI Agents Track"].map((name) => (
-                    <div key={name} className="px-3 py-2 rounded-lg text-sm text-zinc-400 hover:bg-zinc-800 cursor-pointer truncate">
-                      {name}
-                    </div>
-                  ))}
+                <div className="w-64 mx-auto bg-white rounded px-3 py-1 text-xs text-zinc-400 text-center border border-zinc-200">
+                  hub.buidl.lol
                 </div>
               </div>
-
-              {/* Main chat area */}
-              <div className="flex-1 flex flex-col">
-                {/* Messages */}
-                <div className="flex-1 p-6 space-y-6 overflow-auto">
-                  {/* User message */}
-                  <div className="flex justify-end">
-                    <div className="max-w-[80%] px-4 py-3 rounded-2xl rounded-br-md bg-orange-500 text-white text-sm">
-                      Create a 48-hour hackathon for the Base ecosystem with 3 tracks
-                    </div>
-                  </div>
-
-                  {/* Assistant message */}
-                  <div className="flex gap-3">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-xs">
-                      🏗️
-                    </div>
-                    <div className="max-w-[80%]">
-                      <div className="px-4 py-3 rounded-2xl rounded-bl-md bg-zinc-800 text-sm text-zinc-200">
-                        <p className="mb-3">I'll set up your Base hackathon with 3 tracks. Here's the configuration:</p>
-                        <div className="p-3 rounded-lg bg-zinc-900 text-xs font-mono space-y-1">
-                          <div><span className="text-cyan-400">Theme:</span> Base Ecosystem</div>
-                          <div><span className="text-cyan-400">Duration:</span> 48 hours</div>
-                          <div><span className="text-cyan-400">Tracks:</span></div>
-                          <div className="pl-4">• DeFi Innovation</div>
-                          <div className="pl-4">• Consumer Apps</div>
-                          <div className="pl-4">• Infrastructure</div>
+            </div>
+            
+            {/* Interface mock */}
+            <div className="flex h-[400px] md:h-[500px]">
+              {/* Sidebar */}
+              <div className="w-56 border-r border-zinc-200 bg-white p-4 hidden md:block">
+                <div className="flex items-center gap-2 px-3 py-2 bg-zinc-900 text-white text-sm rounded-lg mb-4">
+                  <span>+</span> New Program
+                </div>
+                <div className="space-y-1 text-sm">
+                  <div className="px-3 py-2 rounded-lg bg-zinc-100 text-zinc-900">ETH Denver 2026</div>
+                  <div className="px-3 py-2 rounded-lg text-zinc-500 hover:bg-zinc-50">Base Buildathon</div>
+                  <div className="px-3 py-2 rounded-lg text-zinc-500 hover:bg-zinc-50">Ongoing Bounties</div>
+                </div>
+              </div>
+              
+              {/* Main area */}
+              <div className="flex-1 flex flex-col bg-white">
+                <div className="flex-1 p-6 overflow-auto">
+                  <div className="max-w-xl mx-auto space-y-6">
+                    {/* Assistant message */}
+                    <div className="flex gap-3">
+                      <div className="w-8 h-8 rounded-full bg-zinc-900 flex items-center justify-center text-white text-sm flex-shrink-0">🏗️</div>
+                      <div className="flex-1">
+                        <div className="bg-zinc-100 rounded-2xl rounded-tl-md px-4 py-3 text-sm text-zinc-700">
+                          <p className="mb-3">I've drafted your hackathon configuration:</p>
+                          <div className="bg-white rounded-lg border border-zinc-200 p-3 text-xs space-y-1">
+                            <div><span className="text-zinc-400">Theme:</span> DeFi Innovation</div>
+                            <div><span className="text-zinc-400">Duration:</span> 48 hours</div>
+                            <div><span className="text-zinc-400">Prize Pool:</span> $25,000 USDC</div>
+                            <div><span className="text-zinc-400">Tracks:</span> 3 (Lending, DEX, Yield)</div>
+                          </div>
+                          <p className="mt-3 text-zinc-500">Should I generate the challenge descriptions and judging criteria?</p>
                         </div>
-                        <p className="mt-3 text-zinc-400">Want me to generate bounties for each track?</p>
+                      </div>
+                    </div>
+                    
+                    {/* User message */}
+                    <div className="flex justify-end">
+                      <div className="bg-zinc-900 text-white rounded-2xl rounded-tr-md px-4 py-3 text-sm max-w-[80%]">
+                        Yes, generate challenges for each track with $5K bounties
                       </div>
                     </div>
                   </div>
                 </div>
-
+                
                 {/* Input */}
-                <div className="p-4 border-t border-zinc-800">
-                  <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-zinc-800 border border-zinc-700">
-                    <input
-                      type="text"
-                      placeholder="Configure your hackathon..."
-                      className="flex-1 bg-transparent text-sm text-white placeholder:text-zinc-500 outline-none"
+                <div className="p-4 border-t border-zinc-200">
+                  <div className="flex items-center gap-3 px-4 py-3 bg-zinc-100 rounded-xl">
+                    <input 
+                      type="text" 
+                      placeholder="Describe your innovation program..." 
+                      className="flex-1 bg-transparent text-sm outline-none placeholder:text-zinc-400"
                       disabled
                     />
-                    <button className="w-8 h-8 rounded-lg bg-orange-500 flex items-center justify-center">
+                    <button className="w-8 h-8 bg-zinc-900 rounded-lg flex items-center justify-center">
                       <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M12 5l7 7-7 7" />
                       </svg>
@@ -372,65 +167,159 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="mt-8 text-center">
-            <Link href="/hub" className="btn btn-primary h-12 px-8 text-base glow-orange">
-              Try the Hub
-            </Link>
+      {/* How it works */}
+      <section id="how-it-works" className="py-20 md:py-32 bg-zinc-50">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">How it works</h2>
+            <p className="text-zinc-500 max-w-xl mx-auto">
+              Deploy the platform and agents, configure your program, and let AI handle operations.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                step: "01",
+                title: "Deploy",
+                description: "Clone the repo and deploy with one command. Self-host on your infrastructure or use our managed service.",
+              },
+              {
+                step: "02", 
+                title: "Configure",
+                description: "Set up your hackathon, bounty program, or innovation challenge through the conversational interface.",
+              },
+              {
+                step: "03",
+                title: "Run",
+                description: "AI agent operators handle participant support, judging, and prize distribution. You focus on community.",
+              },
+            ].map((item) => (
+              <div key={item.step} className="text-center">
+                <div className="text-4xl font-semibold text-zinc-200 mb-4">{item.step}</div>
+                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                <p className="text-zinc-500 text-sm">{item.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 md:py-32 border-t border-zinc-800 bg-grid">
-        <div className="container-narrow text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to <span className="gradient-text">buidl</span>?
-          </h2>
-          <p className="text-zinc-400 max-w-xl mx-auto mb-10">
-            Launch a hackathon in minutes. Self-host the agents from GitHub, 
-            or let XO manage your infrastructure.
-          </p>
+      {/* Agent Operators */}
+      <section id="agents" className="py-20 md:py-32">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">Agent Operators</h2>
+            <p className="text-zinc-500 max-w-xl mx-auto">
+              Four specialized AI agents work together to run your innovation program around the clock.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            {agents.map((agent) => (
+              <div key={agent.name} className="p-6 rounded-xl border border-zinc-200 hover:border-zinc-300 transition">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-zinc-100 flex items-center justify-center text-2xl flex-shrink-0">
+                    {agent.icon}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">{agent.name}</h3>
+                    <p className="text-sm text-zinc-500">{agent.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/hub" className="btn btn-primary h-12 px-8 text-base glow-orange w-full sm:w-auto">
-              Launch via Hub
-            </Link>
-            <a
+      {/* OSS Section */}
+      <section className="py-20 md:py-32 bg-zinc-900 text-white">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-semibold mb-4">Open source, your way</h2>
+          <p className="text-zinc-400 max-w-2xl mx-auto mb-10">
+            buidl.lol is fully open source. Self-host the entire platform and agents on your infrastructure, 
+            or work with us for a managed white-label deployment — like Discourse, but for innovation programs.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+            <a 
               href="https://github.com/evmsystems-ai/buidl-lol"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-secondary h-12 px-8 text-base w-full sm:w-auto"
+              className="w-full sm:w-auto inline-flex items-center justify-center h-12 px-8 bg-white text-zinc-900 font-medium rounded-lg hover:bg-zinc-100 transition"
             >
-              Clone from GitHub
+              View on GitHub
+            </a>
+            <a 
+              href="mailto:matt@evmsystems.ai"
+              className="w-full sm:w-auto inline-flex items-center justify-center h-12 px-8 bg-zinc-800 text-white font-medium rounded-lg border border-zinc-700 hover:bg-zinc-700 transition"
+            >
+              Contact for Managed Hosting
             </a>
           </div>
 
-          <p className="mt-8 text-sm text-zinc-500">
-            Need managed hosting?{" "}
-            <a href="mailto:matt@evmsystems.ai" className="text-orange-400 hover:underline">
-              Contact us about XO
-            </a>
+          <div className="grid grid-cols-3 gap-8 max-w-lg mx-auto text-center">
+            <div>
+              <div className="text-2xl font-semibold">MIT</div>
+              <div className="text-sm text-zinc-500">License</div>
+            </div>
+            <div>
+              <div className="text-2xl font-semibold">100%</div>
+              <div className="text-sm text-zinc-500">Open Source</div>
+            </div>
+            <div>
+              <div className="text-2xl font-semibold">4</div>
+              <div className="text-sm text-zinc-500">Agent Operators</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-20 md:py-32">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-semibold mb-4">Ready to coordinate innovation?</h2>
+          <p className="text-zinc-500 max-w-xl mx-auto mb-10">
+            Whether you're a builder looking for opportunities or an organizer launching a program, 
+            buidl.lol has you covered.
           </p>
+          
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link 
+              href="/builder"
+              className="w-full sm:w-auto inline-flex items-center justify-center h-12 px-8 bg-zinc-900 text-white font-medium rounded-lg hover:bg-zinc-800 transition"
+            >
+              Get Started as Builder
+            </Link>
+            <Link 
+              href="/organizer"
+              className="w-full sm:w-auto inline-flex items-center justify-center h-12 px-8 bg-white text-zinc-900 font-medium rounded-lg border border-zinc-300 hover:border-zinc-400 hover:bg-zinc-50 transition"
+            >
+              Get Started as Organizer
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-zinc-800 py-8">
-        <div className="container-wide flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2">
+      <footer className="py-8 border-t border-zinc-200">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2 font-semibold">
             <span>🏗️</span>
-            <span className="font-semibold">buidl.lol</span>
+            <span>buidl.lol</span>
           </div>
-          <div className="flex gap-6 text-sm text-zinc-400">
-            <a href="https://github.com/evmsystems-ai/buidl-lol" target="_blank" rel="noopener noreferrer" className="hover:text-white">GitHub</a>
-            <a href="#agents" className="hover:text-white">Docs</a>
-            <a href="https://discord.gg/buidl" target="_blank" rel="noopener noreferrer" className="hover:text-white">Discord</a>
-            <a href="https://twitter.com/buidl_lol" target="_blank" rel="noopener noreferrer" className="hover:text-white">Twitter</a>
+          <div className="flex gap-6 text-sm text-zinc-500">
+            <a href="https://github.com/evmsystems-ai/buidl-lol" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-900">GitHub</a>
+            <a href="https://twitter.com/buidl_lol" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-900">Twitter</a>
+            <a href="mailto:matt@evmsystems.ai" className="hover:text-zinc-900">Contact</a>
           </div>
-          <p className="text-xs text-zinc-500">
-            Built by <a href="https://evmsystems.ai" className="hover:text-white">EVM Systems</a>
-          </p>
+          <div className="text-sm text-zinc-400">
+            Built by <a href="https://evmsystems.ai" className="hover:text-zinc-900">EVM Systems</a>
+          </div>
         </div>
       </footer>
     </div>
